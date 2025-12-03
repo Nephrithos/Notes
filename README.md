@@ -2,7 +2,7 @@
 
 A full-stack notes application with tag-based organization and dark mode. Built with React + TypeScript frontend and Django REST API backend to explore modern full-stack development patterns.
 
-![Markdown Notes Dashboard](docs/screenshot-dashboard.png)
+![Markdown Notes Dashboard](notes2.png)
 
 ## Features
 
