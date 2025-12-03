@@ -1,0 +1,203 @@
+/* src/styles/mde-theme.css */
+/* Import react-mde's default styles first */
+@import 'react-mde/lib/styles/css/react-mde-all.css';
+
+/* Apply Shadcn/Tailwind styles to override react-mde defaults */
+
+/* Overall editor container */
+.react-mde {
+    /* Use direct CSS variables where possible for Shadcn theme consistency */
+    border: 1px solid hsl(var(--border));
+    /* Equivalent to border border-input */
+    border-radius: var(--radius);
+    /* Equivalent to rounded-md */
+    background-color: hsl(var(--background));
+    /* Equivalent to bg-background */
+    color: hsl(var(--foreground));
+    /* Equivalent to text-foreground */
+    font-family: inherit;
+    /* Inherit font from global CSS */
+}
+
+/* Toolbar */
+.mde-header {
+    background-color: hsl(var(--muted));
+    /* Equivalent to bg-muted */
+    padding: 0.25rem;
+    /* Equivalent to p-1 */
+    border-bottom: 1px solid hsl(var(--input));
+    /* Equivalent to border-b border-input */
+    border-top-left-radius: var(--radius);
+    /* Apply top radius manually */
+    border-top-right-radius: var(--radius);
+    /* Apply top radius manually */
+}
+
+/* Toolbar buttons */
+.react-mde .mde-header button {
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+
+    color: hsl(var(--muted-foreground));
+
+    /* Hover states */
+    &:hover {
+        background-color: hsl(var(--accent));
+        color: hsl(var(--accent-foreground));
+    }
+
+    /* Active/Selected button state */
+    &[data-active="true"] {
+        background-color: hsl(var(--accent));
+        color: hsl(var(--accent-foreground));
+    }
+
+    /* Disabled button state */
+    &[data-disabled="true"] {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
+
+.react-mde .mde-header ul.mde-header-group li.mde-header-item button {
+    padding: 0.5rem 0.75rem;
+    border-radius: var(--radius);
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 150ms;
+
+    /* REVERT THIS TO YOUR THEME VARIABLE: */
+    color: hsl(var(--muted-foreground));
+
+    /* Hover states */
+    &:hover {
+        background-color: hsl(var(--accent));
+        color: hsl(var(--accent-foreground));
+    }
+
+    /* Active/Selected button state */
+    &[data-active="true"] {
+        background-color: hsl(var(--accent));
+        color: hsl(var(--accent-foreground));
+    }
+
+    /* Disabled button state */
+    &[data-disabled="true"] {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
+
+/* Tabs (Write/Preview) */
+.mde-header ul.mde-tabs {
+    border-bottom: none;
+    /* Remove default bottom border */
+}
+
+.mde-header ul.mde-tabs li button {
+    padding-top: 0.5rem;
+    /* Equivalent to py-2 */
+    padding-bottom: 0.5rem;
+    padding-left: 1rem;
+    /* Equivalent to px-4 */
+    padding-right: 1rem;
+    border-bottom: 2px solid transparent;
+    /* Base tab styling */
+    color: hsl(var(--muted-foreground));
+    /* Muted text color */
+
+    &:hover {
+        color: hsl(var(--foreground));
+        /* Hover text color */
+        border-bottom-color: hsl(var(--primary));
+        /* Hover border color */
+    }
+}
+
+.mde-header ul.mde-tabs li button.selected {
+    border-bottom-color: hsl(var(--primary));
+    /* Shadcn primary border for selected tab */
+    color: hsl(var(--primary));
+    /* Shadcn primary text color */
+}
+
+/* Editor and Preview Area */
+.mde-textarea-wrapper textarea.mde-text,
+.mde-preview {
+    border: 0.15rem solid;
+}
+
+.mde-text,
+.mde-preview {
+    padding: 1rem;
+    /* Add padding to content area */
+    background-color: hsl(var(--foreground));
+    /* Ensure background and text match theme */
+    color: hsl(var(--foreground));
+}
+
+/* Editor (textarea) focus state */
+.mde-text textarea:focus {
+    outline: 2px solid hsl(var(--ring));
+    /* Shadcn focus ring color */
+    outline-offset: 2px;
+    /* Shadcn focus ring offset */
+    box-shadow: none;
+    /* Remove default browser shadow if any */
+    border-color: transparent;
+    /* Ensure border doesn't interfere */
+}
+
+/* Preview content styling (using Tailwind Typography for 'prose') */
+.mde-preview .mde-preview-content {
+    /* No direct changes needed here if @tailwindcss/typography is working */
+    @apply prose prose-sm max-w-none;
+}
+
+html.dark .mde-preview .mde-preview-content {
+    @apply prose-invert;
+    /* Try adding this line */
+}
+
+/* Adjust scrollbar for consistency if needed */
+.mde-text::-webkit-scrollbar,
+.mde-preview::-webkit-scrollbar {
+    width: 0.5rem;
+    /* Equivalent to w-2 */
+}
+
+.mde-text::-webkit-scrollbar-thumb,
+.mde-preview::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted));
+    /* Equivalent to bg-muted */
+    border-radius: 9999px;
+    /* Equivalent to rounded-full */
+}
+
+.mde-text::-webkit-scrollbar-track,
+.mde-preview::-webkit-scrollbar-track {
+    background-color: hsl(var(--background));
+    /* Equivalent to bg-background */
+}
+
+/* For Firefox scrollbars */
+.mde-text {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) hsl(var(--background));
+}
+
+.mde-preview {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) hsl(var(--background));
+}
+
+.mde-preview .mde-preview-content h3 {
+    color: hsl(var(--foreground));
+}
