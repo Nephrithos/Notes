@@ -8,15 +8,16 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 load_dotenv(BASE_DIR / ".env.local")
 
-SECRET_KEY = os.getenv(
-    "SECRET", "django-insecure-tuz&2z5+w))hmw4r_*krcv=*tcorylcse#_)yp$2xe=59_3ezd"
-)
+SECRET_KEY = os.environ["SECRET"]   # raises KeyError if unset
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv("DEBUG_STATE", True)
+def env_bool(key: str, default: bool = False) -> bool:
+    return os.getenv(key, str(default)).strip().lower() in ("1", "true", "yes", "on")
+
+DEBUG = env_bool("DEBUG_STATE", True)
 
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS_LIST", "").split(",")
-CORS_ALLOW_CREDENTIALS = os.getenv("CORS_ALLOWED_CREDENTIALS", True)
+CORS_ALLOW_CREDENTIALS = env_bool("CORS_ALLOWED_CREDENTIALS", True)
 CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "127.0.0.1").split(",")
 CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED", "http://127.0.0.1").split(",")
 
